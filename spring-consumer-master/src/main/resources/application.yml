@@ -1,0 +1,19 @@
+server:
+  port: 8082
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    request:
+      exchenge:
+        producer: ex.producer.ubs
+      routing-key:
+        producer: rk.producer.ubs
+      dead-letter:
+        producer: dl.producer.ubs
+      parking-lot:
+        producer: pl.producer.ubs
+    listener:
+      time-retry: 00 39 22 * * *
