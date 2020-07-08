@@ -12,9 +12,26 @@ Caso a aplicação seja encerrada inesperadamente (via task manager ou caso dê 
 * [Spring Boot](https://spring.io/projects/spring-boot)
 * [Spring AMQP](https://spring.io/projects/spring-amqp)
 * [Spring Data](https://spring.io/projects/spring-data)
+* [Maven](https://maven.apache.org/)
+* [Docker](https://www.docker.com)
+* [Rabbitmq](rabbitmq.com)
 
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+### Relatório Geral do Desenvolvimento
+O sistema foi desenvolvido com os objetivos de consumir 4 arquivos no formato .Json tendo sido utilizado os padrões arquiteturais de código Java e as anotações características do Spring Framework conforme citado acima.
+
+Ele foi desenvolvido em 3 módulos mais a instalação até o momento de um Container Docker que está rodando RabbitMq e o respectivo gerenciador de mensageria.
+
+A concepção e a definição de requisitos previu que cada módulo deve ocupar um micro-serviço em container com objetivos específicos que visem utilizar a melhor tecnologia no quesito de controle transacional e de resiliência na aquisição, armazenamento e disponbilidade dos dados.
+
+Não foi finalizado o projeto face o tempo demandado para entrega; entretanto, tem-se pelo código exposto neste repositório todo padrão arquitetural necessário ao atendimento do desafio proposto.
+
+### Especificação de Cada Módulo
+
+* TCRProjetoUBS: este módulo foi desenvolvido  para realizar o acesso e a leitura dos arquivos .Json e persistílos no serviço de mensasgeria. Até o momento o mesmo está persistindo os dados em uma base de dados H2 (banco de dados em memória). Obedecendo as regras de persistências características do Spring Data.
+1
+
+
+
 
 
 
