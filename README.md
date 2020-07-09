@@ -31,8 +31,7 @@ Não foi finalizado o projeto face o tempo demandado para entrega; entretanto, t
 
 * <b> Spring-Producer:</b> este módulo visa executar os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. Está funcionando no início da aplicação por meio de uma API que realiza o envio da mensagem para o RabbitMq em Docker. É chamada na porta <b>8081</b> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
 
-* <b> Spring-Consumer:</b> este módulo visa executar também os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento assim como a Producer a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. 
-Está funcionando no início da aplicação por meio de uma API que realiza o consumo da mensagem para o RabbitMq em Docker liberando a fila OU enviando para <i>DeadLetter</i> ou ainda para <i>Parking Lot</i>. É chamada na porta <b>8082</b> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
+* <b> Spring-Consumer:</b> este módulo visa executar também os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento assim como a Producer a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. Está funcionando no início da aplicação por meio de uma API que realiza o consumo da mensagem para o RabbitMq em Docker liberando a fila OU enviando para <i>DeadLetter</i> ou ainda para <i>Parking Lot</i>. É chamada na porta <b>8082</b> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
 
 * Os micro-serviços estão acessando o RabbitMq pela porta <b>5672</b> confirme arquivo <b>YML</b> especificado nas aplicações respectivamente (application.yml).
 
@@ -56,20 +55,22 @@ $ docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmq rabbitmq:3-managemen
 * Para realizar o consumo da mensagem no RabbitMq de forma a baixar da <i>Routing Key</i> e enviá-la ao destino:
     Na execução da Spring-Consumer:
     - executar localhost:8082/repost
-   A mensagem que estava na fila será printada no console como indicador de sucesso, ou seja, a mensagem foi baixada do <i>Routing Key</i> e no momento apenas apresentada na tela como simulação da Consumer.
+* A mensagem que estava na fila será printada no console como indicador de sucesso, ou seja, a mensagem foi baixada do <i>Routing Key</i> e no momento apenas apresentada na tela como simulação da Consumer.
    
  ### A aplicação está preparada para, de tempos em tempos, realizar nova aquisição de consumo da mensgem por um determinado volume de tentativas, após o volume programado de execuções e a mensagem não for consumida, será envida para <i>DeadLetter</i> para tratamento manual no Console do RabbitMq.
+ 
  ### Caso a fila seja excluída a aplicação está preparada para recriá-las.
+ 
  ### A aplicação ficou resiliente a quedas tanto na Producer quanto na Consumer além de tratar as filas que estão no RabbitMq.
  
  OBS: A aplicação foi desenvolvida utilizando o Spring AMQP procurando ao máximo torná-la independente do Brocker (RabbitMq, IbmMq, Kafka, etc.).
 
 ### Pendências para o Sucesso do Desafio 1:
-*1 Criação de 4 containers para rodar de forma interdependente cada um dos serviços sendo:
-    *1a) Container com a base de dados relacional que deverá receber os dados persistidos e controlados por meio de <i>Primary key</i>;
-    *2a) Container com a aplicação que fará a Producer de envio para o Container do RabbitMq;
-    *3a) Container que rodará a aplicação com a Consumer que fará a aquisição das informações para persistência no Container com Base de Dados relacional;
-    *4a) Container com o RabbitMq;
+* 1 Criação de 4 containers para rodar de forma interdependente cada um dos serviços sendo:
+    * 1a) Container com a base de dados relacional que deverá receber os dados persistidos e controlados por meio de <i>Primary key</i>;
+    * 2a) Container com a aplicação que fará a Producer de envio para o Container do RabbitMq;
+    * 3a) Container que rodará a aplicação com a Consumer que fará a aquisição das informações para persistência no Container com Base de Dados relacional;
+    * 4a) Container com o RabbitMq;
 * Consumo de multiplos arquivos por meio de Strem e Map (para utilização de paralelismo) constantes em uma pasta padrão; a aplicação está consumindo no momento o arquivo que for indicado;<p/>
 * Tratativa para que a aplicação não repita os dados já persistidos;<p/>
 * Conversão da aplicação para ao invés de chamar API seja na verdade invocado um micro-serviço de envio, consumo  das mensagens;<br />
