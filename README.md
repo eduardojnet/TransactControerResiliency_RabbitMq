@@ -1,4 +1,4 @@
-# Desafio 1 - Framework Java: Spring Framework
+# Desafio 1
 
 ## Controle de Transação e  Resiliência
 
@@ -29,9 +29,22 @@ Não foi finalizado o projeto face o tempo demandado para entrega; entretanto, t
 
 * <b> TCRProjetoUBS:</b> este módulo foi desenvolvido  para realizar o acesso e a leitura dos arquivos .Json e persistílos no serviço de mensasgeria. Até o momento o mesmo está persistindo os dados em uma base de dados H2 (banco de dados em memória). Obedecendo as regras de persistências características do Spring Data.
 
-* <b> Spring-Consumer-Producer:</b> este módulo visa executar os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. Está funcionando no início da aplicação por meio de uma API que realiza o envio da mensagem para o RabbitMq em Docker.
+* <b> Spring-Producer:</b> este módulo visa executar os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. Está funcionando no início da aplicação por meio de uma API que realiza o envio da mensagem para o RabbitMq em Docker. É chamada na porta <b>8081<b/> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
 
-* <b> Spring-Consumer-Producer:</b> este módulo visa executar os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. Está funcionando no início da aplicação por meio de uma API que realiza o envio da mensagem para o RabbitMq em Docker.
+* <b> Spring-Consumerr:</b> este módulo visa executar também os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento assim como a Producer a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. 
+Está funcionando no início da aplicação por meio de uma API que realiza o consumo da mensagem para o RabbitMq em Docker liberando a fila OU enviando para DeadLetter ou ainda para <i>Parking Lot</i>. É chamada na porta <b>8082<b/> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
+
+Os micro-serviços estão acessando o RabbitMq pela porta <b>5672</b> confirme arquivo <b>YML</b> especificado nas aplicações respectivamente (application.yml).
+
+* O RabbitMq por sua vez está rodando em Container Docker na portal <b>5672</b>.
+
+### Como executar a aplicação
+### Obs.: conforme o que foi desenvolvido até o momento.
+
+
+
+
+
 
 
 
