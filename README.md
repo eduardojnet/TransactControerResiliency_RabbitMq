@@ -31,15 +31,36 @@ Não foi finalizado o projeto face o tempo demandado para entrega; entretanto, t
 
 * <b> Spring-Producer:</b> este módulo visa executar os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. Está funcionando no início da aplicação por meio de uma API que realiza o envio da mensagem para o RabbitMq em Docker. É chamada na porta <b>8081<b/> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
 
-* <b> Spring-Consumerr:</b> este módulo visa executar também os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento assim como a Producer a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. 
-Está funcionando no início da aplicação por meio de uma API que realiza o consumo da mensagem para o RabbitMq em Docker liberando a fila OU enviando para DeadLetter ou ainda para <i>Parking Lot</i>. É chamada na porta <b>8082<b/> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
+* <b> Spring-Consumer:</b> este módulo visa executar também os Beans na abertura da aplicação que realizam toda configuração do <b>Spring AMQP</b> não se prendento assim como a Producer a nenhum Brocker específico de mensageria embora toda aplicação utilize RabbitMq. 
+Está funcionando no início da aplicação por meio de uma API que realiza o consumo da mensagem para o RabbitMq em Docker liberando a fila OU enviando para <i>DeadLetter</i> ou ainda para <i>Parking Lot</i>. É chamada na porta <b>8082<b/> desde que a TCRProjetoUBS ou nenhuma outra aplicação esteja utilizando a mesma porta.
 
-Os micro-serviços estão acessando o RabbitMq pela porta <b>5672</b> confirme arquivo <b>YML</b> especificado nas aplicações respectivamente (application.yml).
+* Os micro-serviços estão acessando o RabbitMq pela porta <b>5672</b> confirme arquivo <b>YML</b> especificado nas aplicações respectivamente (application.yml).
 
 * O RabbitMq por sua vez está rodando em Container Docker na portal <b>5672</b>.
 
 ### Como executar a aplicação
 ### Obs.: conforme o que foi desenvolvido até o momento.
+* Para instalar o container Docker com RabbitMq:
+$ docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmq rabbitmq:3-management
+
+* A aplicação (no estado atual de desenvolvimento) deverá ter o build realizado da Spring-Producer e/ou Spring-Consumer. O desenvolvimento preocupou-se com a ordem de de execução para evitar bug na execução. Para isso ambos os módulos foram desenvolvidos para serem independentes quanto a execução.
+
+* Ao executar (build) das aplicações via Postman deverá ser executado da seguinte maneira:
+    Na execução da Spring-Producer:
+      - executar  localhost:8081/send
+      no Body do Postman deve constar o Json (mensagem) a ser enviada ao <i>Routing Key</i>:
+      {
+        "text": "Este é um envio de mensagem de testes que será substituído pelo cadastro de usuários"
+      }
+
+* Para realizar o consumo da mensagem no RabbitMq de forma a baixar da <i>Routing Key</i> e enviá-la ao destino:
+    Na execução da Spring-Consumer:
+    - executar localhost:8082/repost
+   A mensagem que estava na fila será printada no console como indicador de sucesso, ou seja, a mensagem foi baixada do <i>Routing Key</i> e no momento apenas apresentada na tela como simulação da Consumer.
+   
+ ### A aplicação está preparada para, de tempos em tempos, realizar nova aquisição de consumo da mensgem por um determinado volume de tentativas, após o volume programado de execuções e a mensagem não for consumida, será envida para <i>DeadLetter</i> para tratamento manual no Console do RabbitMq.
+ ### Caso a fila seja excluída a aplicação está preparada para recriá-las.
+ 
 
 
 
