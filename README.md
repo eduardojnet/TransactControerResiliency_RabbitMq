@@ -39,9 +39,10 @@ Não foi finalizado o projeto face o tempo demandado para entrega; entretanto, t
 
 ### Como executar a aplicação
 ### Obs.: conforme o que foi desenvolvido até o momento.
-* Para instalar o container Docker com RabbitMq:
-
-* <span style="font-family:Curier New; font-size:4em;">$ docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmq rabbitmq:3-management</span>
+* Para instalar o container Docker com RabbitMq: 
+```
+$ docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmq rabbitmq:3-management
+```
 
 * A aplicação (no estado atual de desenvolvimento) deverá ter o build realizado da Spring-Producer e/ou Spring-Consumer. O desenvolvimento preocupou-se com a ordem de de execução para evitar bug na execução. Para isso ambos os módulos foram desenvolvidos para serem independentes quanto a execução.
 
