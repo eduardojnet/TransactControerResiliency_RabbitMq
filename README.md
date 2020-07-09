@@ -66,13 +66,13 @@ $ docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmq rabbitmq:3-managemen
  
 ### Pendências para o Sucesso do Desafio 1:
 1 - Criação de 4 containers para rodar de forma interdependente cada um dos serviços sendo:
-    - 1a) Container com a base de dados relacional que deverá receber os dados persistidos e controlados por meio de <i>Primary key</i>;
-    - 2a) Container com a aplicação que fará a Producer de envio para o Container do RabbitMq;
-    - 3a) Container que rodará a aplicação com a Consumer que fará a aquisição das informações para persistência no Container com Base de Dados relacional;
-    - 4a) Container com o RabbitMq;
-2 - Consumo de multiplos arquivos por meio de Strem e Map (para utilização de paralelismo) constantes em uma pasta padrão; a aplicação está consumindo no momento o arquivo que for indicado;
-3 - Tratativa para que a aplicação não repita os dados já persistidos;
-4 - Conversão da aplicação para ao invés de chamar API seja na verdade invocado um micro-serviço de envio, consumo  das mensagens;
+    - 1a) Container com a base de dados relacional que deverá receber os dados persistidos e controlados por meio de <i>Primary key</i>;< /B>
+    - 2a) Container com a aplicação que fará a Producer de envio para o Container do RabbitMq;< /B>
+    - 3a) Container que rodará a aplicação com a Consumer que fará a aquisição das informações para persistência no Container com Base de Dados relacional;< /B>
+    - 4a) Container com o RabbitMq;< /B>
+2 - Consumo de multiplos arquivos por meio de Strem e Map (para utilização de paralelismo) constantes em uma pasta padrão; a aplicação está consumindo no momento o arquivo que for indicado;< /B>
+3 - Tratativa para que a aplicação não repita os dados já persistidos;< /B>
+4 - Conversão da aplicação para ao invés de chamar API seja na verdade invocado um micro-serviço de envio, consumo  das mensagens;< /B>
 
 
 
